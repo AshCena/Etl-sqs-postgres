@@ -104,8 +104,8 @@ We need to fetch the data from sqs and write it into postgres post transformatio
 
 - `How can this application scale with a growing dataset.`
         
-        We can scale up the pods in Kubernetes. For very huge dataset, I would probably think of a spark based transformer.
-        The code for that will be very easy to write as the our ETL Job is coded to the Abstract class and not any specific implementation.
+       We will have a deployment.yaml for deploying the app which will be deployed by ci/cd pipeline in prod. We can scale up the pods in Kubernetes. We can use autoscaler in kubernetes to scale up depending on the memory or number of connections. For very huge dataset, I would probably think of a spark based transformer.
+        The code for that will be very easy to write as the our ETL Job is coded to the Abstract class and not any specific implementation. Also since our entire code follows idempotency so duplicacy is also not an issue here.
 
 - `How can PII be recovered later on?`
         
