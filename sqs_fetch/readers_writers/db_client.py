@@ -1,7 +1,7 @@
 import logging
 from typing import List, Any
 
-from sqs_fetch.connections.db_connection import DBConnection
+from connections.db_connection import DBConnection
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import DeclarativeMeta
 

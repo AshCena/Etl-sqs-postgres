@@ -1,6 +1,6 @@
 from typing import List, Dict, Any
 
-from sqs_fetch.connections.sqs_connection import SQSConnection
+from connections.sqs_connection import SQSConnection
 from .client_registery import client_registry
 from .read_client import ReadClient
 
