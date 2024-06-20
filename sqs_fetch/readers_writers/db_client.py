@@ -1,7 +1,7 @@
 import logging
 from typing import List, Any
 
-from connections.db_connection import DBConnection
+from sqs_fetch.connections.db_connection import DBConnection
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import DeclarativeMeta
 
@@ -20,7 +20,7 @@ class DBClient(WriteClient):
         print("db_path ", db_path)
 
     def write(self, data: List[Any]) -> None:
-
+        table_name = ""
         if isinstance(data[0].__class__, DeclarativeMeta):
             table_name = data[0].__class__.__tablename__
             print(f"Ensuring table '{table_name}' exists.")
