@@ -133,5 +133,10 @@ We need to fetch the data from sqs and write it into postgres post transformatio
         Taking the current status as it is, I would add tests to the code.
             
 
+### References used:
 
+        https://docs.localstack.cloud/getting-started/
+        https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-an-engine
+        https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-objects-and-persist
+        https://docs.sqlalchemy.org/en/20/orm/session_basics.html#basics-of-using-a-session
 
