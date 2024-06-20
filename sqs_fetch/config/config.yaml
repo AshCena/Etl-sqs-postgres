@@ -1,0 +1,19 @@
+etl:
+  read_client:
+    type: sqs
+    endpoint_url: http://localstack:4566
+    region_name: us-east-1
+    queue_name: login-queue
+
+  write_client:
+    type: postgres
+    db_path: postgresql+psycopg2://postgres:postgres@database:5432/postgres
+
+  validator:
+    message_schema:
+      - user_id
+      - device_type
+      - ip
+      - device_id
+      - locale
+      - app_version

@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  localstack:
+    image: fetchdocker/data-takehome-localstack
+    ports:
+    - 4566:4566
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localstack:4566/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  database:
+    image: fetchdocker/data-takehome-postgres
+    ports:
+    - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  fetch_etl:
+    build: .
+    container_name: sqs-fetch-etl-app
+    depends_on:
+      localstack:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+    entrypoint: [ "sh", "-c", "echo Waiting for 10 seconds... && sleep 10 && python main.py" ]
