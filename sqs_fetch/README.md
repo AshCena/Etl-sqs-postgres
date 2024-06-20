@@ -100,7 +100,7 @@ We need to fetch the data from sqs and write it into postgres post transformatio
         I will defenitely add more exception handling. MI will also try to log the exception to some location in s3. 
         Once we have the log on s3 we can have some sort of notification using AWS SNS.
     
-        I will include more tests
+        I will include more tests such as integration test and write the implementation for the tests as well.
 
 - `How can this application scale with a growing dataset.`
         
@@ -133,5 +133,10 @@ We need to fetch the data from sqs and write it into postgres post transformatio
         Taking the current status as it is, I would add tests to the code.
             
 
+### References used:
 
+        https://docs.localstack.cloud/getting-started/
+        https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-an-engine
+        https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-objects-and-persist
+        https://docs.sqlalchemy.org/en/20/orm/session_basics.html#basics-of-using-a-session
 
