@@ -28,7 +28,7 @@ We need to fetch the data from sqs and write it into postgres post transformatio
   - `db_connection.py`
   - `sqs_connection.py`
 
-        connections folder contains the details of connections that we are going to use in our project.
+        connections folder contains the details of the connections that we are going to use in our project.
         Here I have DBConnection and SQSConnection written in a singleton pattern as we dont want to duplicate connections.
 
 #### models
@@ -93,32 +93,32 @@ We need to fetch the data from sqs and write it into postgres post transformatio
 ## Questions
  - `How would you deploy this application in production?`
             
-        I will use any ci/cd pipeline to first run all the tests that are written and then build the docker image and then deploy it on the kubernetes server
+        I will use any ci/cd pipeline to first run all the tests that are written and then build the docker image and then deploy it on the Kubernetes server
 
 - `What other components would you want to add to make this production ready?`
 
-        I will defenitely add more exception handling. MI will also try to log the exception to some location in s3. 
+        I will definitely add more exception handling. MI will also try to log the exception to some locations in s3. 
         Once we have the log on s3 we can have some sort of notification using AWS SNS.
     
         I will include more tests such as integration test and write the implementation for the tests as well.
 
 - `How can this application scale with a growing dataset.`
         
-        We can scale up the pods in kubernetes. For very huge dataset, I would probably think of a spark based transformer.
+        We can scale up the pods in Kubernetes. For very huge dataset, I would probably think of a spark based transformer.
         The code for that will be very easy to write as the our ETL Job is coded to the Abstract class and not any specific implementation.
 
 - `How can PII be recovered later on?`
         
         The Goal of masking is that it is not recoverable, other wise that destroys the whole idea to mask in the first place.
         However, if that is what is needed then we can use fernet keys to encrypt and decrypt the hashes. The fernet keys will be needed to be stored in 
-        a very secure location like AWS secrets and injected via environment varibles only (This injection can be the part of CI/CD pipeline as well).
+        a very secure location like AWS secrets and injected via environment variables only (This injection can be the part of CI/CD pipeline as well).
 
 
 - `What are the assumptions you made?`
 
-        Assmptions made:
-            1. Since in the table app_version was given as integer and tha data was string based, I have taken the first number as the version.
-            2. PIIs are not recoverable. (For recoverable PII, I will use different strategy (see above) )
+        Assumptions made:
+            1. Since in the table app_version was given as an integer and the data was string-based, I have taken the first number as the version.
+            2. PIIs are not recoverable. (For recoverable PII, I will use a different strategy (see above) )
             3. Batch size in one round of ingestion - 10 messages. (Can be changed in SQSClient)
             
 
@@ -127,8 +127,8 @@ We need to fetch the data from sqs and write it into postgres post transformatio
 
 ### Next Steps: 
 
-        Testing and writing tests is one of the major step that needs to be done for any project.
-        Generally, I tend to follow TDD but given the time, I went for direct solution. 
+        Testing and writing tests is one of the major steps that needs to be done for any project.
+        Generally, I tend to follow TDD but given the time, I went for a direct solution. 
         
         Taking the current status as it is, I would add tests to the code.
             
@@ -139,4 +139,6 @@ We need to fetch the data from sqs and write it into postgres post transformatio
         https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-an-engine
         https://docs.sqlalchemy.org/en/20/orm/quickstart.html#create-objects-and-persist
         https://docs.sqlalchemy.org/en/20/orm/session_basics.html#basics-of-using-a-session
+        https://www.geeksforgeeks.org/unit-testing-python-unittest/
+        
 
