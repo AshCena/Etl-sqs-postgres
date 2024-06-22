@@ -8,6 +8,16 @@ We need to fetch the data from sqs and write it into postgres post transformatio
     cd sqs_fetch
     docker-compose up
 
+
+## Flow of the code
+    main (uses config to configure read and write clients and Validator) --> ETLJob --> Uses (readers_writers (ReadClient, WriteClient), utils(Transformer, Validator)) to write the data.
+    readers_writers (uses connections to define  read and write clients) --> ReadClient, WriteClient  (Both are abstract classes) --> Actual Implementation --> SQSClient, DBClient.
+    utils (defines the utilities to be used in the ETL job) --> Transformer is an abstract class (pii_transform is the implementation), Validator is an abstract class (SchemaValidator an implementation).
+    connections (defines db_conenction and sqs_connection). [I could have used abstract class here as Connection and then db and sqs could have been specific connections, but for now we have specific implementations (This may be something to be improved before productionising)].
+
+    Overall Flow -->
+    main --> Uses ETLJob --> Uses ReadClient, WriteClient, SchemaValidator, and Transformer to do the task.
+
 # Project Structure
 
 ## TakeHome
